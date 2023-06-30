@@ -1,4 +1,4 @@
-import { TableProps } from '../types';
+import { TableProps } from './types';
 
 export function SankeyTable({ data, handleEdit, handleRemove }: TableProps) {
   return (
