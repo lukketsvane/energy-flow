@@ -1,3 +1,5 @@
+// SankeyTable.tsx
+
 import { TableProps } from './types';
 
 export function SankeyTable({ data, handleEdit, handleRemove }: TableProps) {
@@ -8,7 +10,6 @@ export function SankeyTable({ data, handleEdit, handleRemove }: TableProps) {
           <th>From</th>
           <th>To</th>
           <th>Weight</th>
-          <th>Name</th>
           <th></th>
         </tr>
       </thead>
