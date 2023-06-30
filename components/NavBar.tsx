@@ -8,19 +8,20 @@ export default function TopNav() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
+  const handleLinkClick = (path) => {
+    if (router.pathname !== path) {
+      router.push(path);
+    }
+    setIsOpen(false);
+  }
+
   const toggleModal = () => setIsOpen(!isOpen);
 
   return (
     <nav className="flex flex-row w-full items-center space-y-2.5 px-6 py-4 bg-white shadow-md">
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center space-x-4">
-          {router.pathname === '/' ? (
-            <Image src="/logo.png" width={52} height={21} alt="logo" />
-          ) : (
-            <Link href="/">
-              <Image src="/logo.png" width={52} height={21} alt="logo" />
-            </Link>
-          )}
+          <Image src="/logo.png" width={52} height={21} alt="logo" />
           <h1 className="text-lg font-bold">FlowViz 🧙</h1>
           <div className="hidden md:flex items-center space-x-4 ml-4">
             <Link href="/">
@@ -39,7 +40,7 @@ export default function TopNav() {
         </div>
         <div className="flex items-center space-x-4 md:hidden">
           <button onClick={toggleModal}>
-            <Image src="/hamburger_icon.png" width={24} height={24} alt="menu" />
+            <Image src={isOpen ? "/close-icon.png" : "/hamburger_icon.png"} width={24} height={24} alt="menu" />
           </button>
         </div>
         <div className="hidden md:flex items-center space-x-4">
@@ -59,17 +60,16 @@ export default function TopNav() {
         {isOpen && (
           <div className="fixed inset-0 flex items-start justify-center z-50 pt-20">
             <div className="bg-white p-5 w-full h-full overflow-auto">
-              <button onClick={toggleModal}>Close</button>
-              <div className="space-y-2 mt-5">
-                <Link href="/docs">
-                  <span className="text-base font-medium text-grey-600 hover:text-blue-800 block">Docs</span>
-                </Link>
-                <Link href="/help">
-                  <span className="text-base font-medium text-grey-600 hover:text-blue-800 block">Help centre</span>
-                </Link>
-                <Link href="/faq">
-                  <span className="text-base font-medium text-grey-600 hover:text-blue-800 block">FAQ</span>
-                </Link>
+              <div className="space-y-4 mt-5 text-2xl flex flex-col">
+                <button onClick={() => handleLinkClick("/docs")}>
+                  <span className="font-medium text-grey-600 hover:text-blue-800 block">Docs</span>
+                </button>
+                <button onClick={() => handleLinkClick("/help")}>
+                  <span className="font-medium text-grey-600 hover:text-blue-800 block">Help centre</span>
+                </button>
+                <button onClick={() => handleLinkClick("/faq")}>
+                  <span className="font-medium text-grey-600 hover:text-blue-800 block">FAQ</span>
+                </button>
               </div>
             </div>
           </div>
