@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Chart } from 'react-google-charts';
 
 export default function Sankey() {
-  const [data, setData] = useState([['A', 'X', 5], ['A', 'Y', 7], ['A', 'Z', 6], ['B', 'X', 2], ['B', 'Y', 9], ['B', 'Z', 4]]);
-  const [input, setInput] = useState({ from: '', to: '', weight: 0 });
+  const [data, setData] = useState([['A', 'X', 5, 'A to X'], ['A', 'Y', 7, 'A to Y'], ['A', 'Z', 6, 'A to Z'], ['B', 'X', 2, 'B to X'], ['B', 'Y', 9, 'B to Y'], ['B', 'Z', 4, 'B to Z']]);
+  const [input, setInput] = useState({ from: '', to: '', weight: 0, label: '' });
   const [options, setOptions] = useState({
     height: 400,
     sankey: {
@@ -33,8 +33,8 @@ export default function Sankey() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setData([...data, [input.from, input.to, parseInt(input.weight)]]);
-    setInput({ from: '', to: '', weight: 0 });
+    setData([...data, [input.from, input.to, parseInt(input.weight), input.label]]);
+    setInput({ from: '', to: '', weight: 0, label: '' });
   };
 
   const handleEdit = (index, event) => {
@@ -63,13 +63,11 @@ export default function Sankey() {
           <input className="border p-2 rounded mr-2" name="from" value={input.from} onChange={handleChange} placeholder="From" required />
           <input className="border p-2 rounded mr-2" name="to" value={input.to} onChange={handleChange} placeholder="To" required />
           <input className="border p-2 rounded mr-2" name="weight" type="number" value={input.weight} onChange={handleChange} placeholder="Weight" required />
+          <input className="border p-2 rounded mr-2" name="label" value={input.label} onChange={handleChange} placeholder="Label" required />
           <button className="bg-blue-500 text-white p-2 rounded" type="submit">Add</button>
         </form>
         <form className="mb-4" onSubmit={(e) => e.preventDefault()}>
-          <label className="mr-2">Colors:</label>
-          <input className="border p-2 rounded mr-2" name="colors" value={options.sankey.node.colors.join(',')} onChange={handleOptionsChange} required />
-          <br/>
-          <label className="mr-2">Font:</label>
+          <label className="mr-2">Font Name:</label>
           <input className="border p-2 rounded mr-2" name="fontName" value={options.sankey.node.label.fontName} onChange={handleOptionsChange} placeholder="Font Name" required />
           <label className="mr-2">Font Size:</label>
           <input className="border p-2 rounded mr-2" name="fontSize" type="number" value={options.sankey.node.label.fontSize} onChange={handleOptionsChange} placeholder="Font Size" required />
@@ -80,6 +78,7 @@ export default function Sankey() {
               <th className="border p-2">From</th>
               <th className="border p-2">To</th>
               <th className="border p-2">Weight</th>
+              <th className="border p-2">Label</th>
             </tr>
           </thead>
           <tbody>
@@ -88,6 +87,7 @@ export default function Sankey() {
                 <td><input className="border p-2 rounded" name="0" value={row[0]} onChange={(event) => handleEdit(index, event)} /></td>
                 <td><input className="border p-2 rounded" name="1" value={row[1]} onChange={(event) => handleEdit(index, event)} /></td>
                 <td><input className="border p-2 rounded" name="2" type="number" value={row[2]} onChange={(event) => handleEdit(index, event)} /></td>
+                <td><input className="border p-2 rounded" name="3" value={row[3]} onChange={(event) => handleEdit(index, event)} /></td>
               </tr>
             ))}
           </tbody>
@@ -98,7 +98,7 @@ export default function Sankey() {
           chartType="Sankey"
           loader={<div>Loading Chart</div>}
           data={[
-            ['From', 'To', 'Weight'],
+            ['From', 'To', 'Weight', { role: 'tooltip' }],
             ...data
           ]}
           options={options}
