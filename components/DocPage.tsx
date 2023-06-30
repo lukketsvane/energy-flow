@@ -11,11 +11,13 @@ type DocPageProps = {
 };
 
 export function DocPage({ docs, selectedDoc }: DocPageProps) {
-  const [expandedFolders, setExpandedFolders] = useState<string[]>(['docs']);
+  const [expandedFolders, setExpandedFolders] = useState<string[]>([]);
 
   useEffect(() => {
-    setExpandedFolders(['docs']);
-  }, []);
+    const folders = docs.map((doc) => doc.filePath.split('/').slice(0, -1).join('/'));
+    const uniqueFolders = [...new Set(folders)];
+    setExpandedFolders(uniqueFolders);
+  }, [docs]);
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
@@ -57,7 +59,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-hidden px-4 h-screen sticky top-0">
+      <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 px-4 h-screen sticky top-0 overflow-y-auto">
         {Object.keys(docsByFolder).map((folder) => (
           <div
             key={folder}
@@ -81,7 +83,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
           </div>
         ))}
       </nav>
-      <main className="flex-1 p-10 overflow-auto">
+      <main className="flex-1 p-10 h-screen overflow-y-auto">
         <div className="prose dark:prose-dark max-w-none">
           <ReactMarkdown
             components={markdownComponents}
