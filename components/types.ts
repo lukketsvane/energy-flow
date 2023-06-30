@@ -7,7 +7,6 @@ export interface InputProps {
     from: string;
     to: string;
     weight: string;
-    label: string;
   };
   options: any;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -21,6 +20,7 @@ export interface EditProps {
   handleRemove: (index: number) => void;
   row: string[];
 }
+
 export interface TableProps {
   data: (string | number)[][];
   handleEdit: (index: number, event: ChangeEvent<HTMLInputElement>) => void;
