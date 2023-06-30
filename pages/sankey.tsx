@@ -3,6 +3,15 @@ import { Chart } from "react-google-charts";
 import { SankeyForm } from '@/components/SankeyForm';
 import { SankeyTable } from '@/components/SankeyTable';
 
+type LabelOptions = {
+  fontName: string;
+  fontSize: number;
+  color: string;
+  bold: boolean;
+  italic: boolean;
+  [key: string]: string | number | boolean;
+}
+
 export default function Sankey() {
   const [data, setData] = useState([['A', 'X', 5], ['A', 'Y', 7], ['A', 'Z', 6], ['B', 'X', 2], ['B', 'Y', 9], ['B', 'Z', 4]]);
   const [input, setInput] = useState({ from: '', to: '', weight: '' });
@@ -33,13 +42,15 @@ export default function Sankey() {
     setInput({ from: '', to: '', weight: '' });
   };
 
+
   const handleOptionsChange = (event: ChangeEvent<HTMLInputElement>) => {
     setOptions(prev => {
       const newOptions = { ...prev };
-      newOptions.sankey.node.label[event.target.name] = event.target.value;
+      (newOptions.sankey.node.label as LabelOptions)[event.target.name] = event.target.value;
       return newOptions;
     });
   };
+
 
   const handleEdit = (index: number, event: ChangeEvent<HTMLInputElement>) => {
     const newData = [...data];
