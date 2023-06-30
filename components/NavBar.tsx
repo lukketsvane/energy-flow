@@ -8,7 +8,7 @@ export default function TopNav() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
 
-  const handleLinkClick = (path) => {
+  const handleLinkClick = (path: string) => {
     if (router.pathname !== path) {
       router.push(path);
     }
