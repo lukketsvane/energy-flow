@@ -15,7 +15,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
 
   useEffect(() => {
     const folders = docs.map((doc) => doc.filePath.split('/').slice(0, -1).join('/'));
-    const uniqueFolders = [...new Set(folders)];
+    const uniqueFolders = Array.from(new Set(folders));
     setExpandedFolders(uniqueFolders);
   }, [docs]);
 
