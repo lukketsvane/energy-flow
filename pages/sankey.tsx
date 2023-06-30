@@ -14,7 +14,7 @@ type LabelOptions = {
 
 export default function Sankey() {
   const [data, setData] = useState([['A', 'X', 5], ['A', 'Y', 7], ['A', 'Z', 6], ['B', 'X', 2], ['B', 'Y', 9], ['B', 'Z', 4]]);
-  const [input, setInput] = useState({ from: '', to: '', weight: '', label: '' });
+  const [input, setInput] = useState({ from: '', to: '', weight: '' });
   const [options, setOptions] = useState({
     height: 400,
     sankey: {
@@ -42,7 +42,6 @@ export default function Sankey() {
     setInput({ from: '', to: '', weight: '' });
   };
 
-
   const handleOptionsChange = (event: ChangeEvent<HTMLInputElement>) => {
     setOptions(prev => {
       const newOptions = { ...prev };
@@ -50,7 +49,6 @@ export default function Sankey() {
       return newOptions;
     });
   };
-
 
   const handleEdit = (index: number, event: ChangeEvent<HTMLInputElement>) => {
     const newData = [...data];
