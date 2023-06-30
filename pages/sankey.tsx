@@ -39,7 +39,7 @@ export default function Sankey() {
 
   const handleEdit = (index: number, event: ChangeEvent<HTMLInputElement>) => {
     const newData = [...data];
-    newData[index][event.target.name] = event.target.value;
+    newData[index][Number(event.target.name)] = event.target.value;
     setData(newData);
   };
 
