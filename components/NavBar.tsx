@@ -10,7 +10,7 @@ export default function TopNav() {
           <Image src="/logo.png" width={52} height={21} alt="logo" />
           <h1 className="text-lg font-bold">FlowViz 🧙</h1>
           <Link href="/">
-            <Image src="/back-button.svg" width={7.86} height={13.24} alt="back button" />
+            <Image src="/back-button.svg" width={12.00} height={20.20} alt="back button" />
           </Link>
           <Link href="/docs">
             <span className="text-base font-medium text-grey-600 hover:text-blue-800">Docs</span>

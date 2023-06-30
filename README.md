@@ -60,11 +60,11 @@ This application is deployed on Vercel.
 
 ## Contributors
 
-- Linnea Espevik
+- Iver Raknes Finne
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+This project is licensed under ABB PAEN - see the LICENSE.md file for details.
 
 ## Acknowledgments
 
