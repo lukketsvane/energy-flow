@@ -1,5 +1,5 @@
 // pages/Sankey.tsx
-import React, { useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { Chart } from 'react-google-charts';
 
 export default function Sankey() {
@@ -27,23 +27,23 @@ export default function Sankey() {
     }
   });
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInput({ ...input, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setData([...data, [input.from, input.to, parseInt(input.weight), input.label]]);
     setInput({ from: '', to: '', weight: 0, label: '' });
   };
 
-  const handleEdit = (index, event) => {
+  const handleEdit = (index: number, event: ChangeEvent<HTMLInputElement>) => {
     const newData = [...data];
     newData[index][event.target.name] = event.target.value;
     setData(newData);
   };
 
-  const handleOptionsChange = (event) => {
+  const handleOptionsChange = (event: ChangeEvent<HTMLInputElement>) => {
     setOptions({
       ...options,
       sankey: {
@@ -64,9 +64,9 @@ export default function Sankey() {
           <input className="border p-2 rounded mr-2" name="to" value={input.to} onChange={handleChange} placeholder="To" required />
           <input className="border p-2 rounded mr-2" name="weight" type="number" value={input.weight} onChange={handleChange} placeholder="Weight" required />
           <input className="border p-2 rounded mr-2" name="label" value={input.label} onChange={handleChange} placeholder="Label" required />
-          <button className="bg-blue-500 text-white p-2 rounded" type="submit">Add</button>
+          <button className="border p-2 rounded bg-blue-500 text-white" type="submit">Add</button>
         </form>
-        <form className="mb-4" onSubmit={(e) => e.preventDefault()}>
+        <form className="mb-4">
           <label className="mr-2">Font Name:</label>
           <input className="border p-2 rounded mr-2" name="fontName" value={options.sankey.node.label.fontName} onChange={handleOptionsChange} placeholder="Font Name" required />
           <label className="mr-2">Font Size:</label>
