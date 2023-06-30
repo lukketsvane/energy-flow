@@ -21,3 +21,8 @@ export interface EditProps {
   handleRemove: (index: number) => void;
   row: string[];
 }
+export interface TableProps {
+  data: (string | number)[][];
+  handleEdit: (index: number, event: ChangeEvent<HTMLInputElement>) => void;
+  handleRemove: (index: number) => void;
+}
