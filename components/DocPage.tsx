@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Doc } from '@/lib/docs';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -11,7 +11,11 @@ type DocPageProps = {
 };
 
 export function DocPage({ docs, selectedDoc }: DocPageProps) {
-  const [expandedFolders, setExpandedFolders] = useState<string[]>([]);
+  const [expandedFolders, setExpandedFolders] = useState<string[]>(['docs']);
+
+  useEffect(() => {
+    setExpandedFolders(['docs']);
+  }, []);
 
   const renderDocLink = (doc: Doc, folder: string) => {
     const isSelected = doc.filePath === selectedDoc.filePath;
@@ -32,7 +36,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
     );
   };
 
-  const docsByFolder: Record<string, Doc[]> = docs.reduce((acc, doc) => {
+  const docsByFolder: Record<string, Doc[]> = docs.reduce((acc: Record<string, Doc[]>, doc: Doc) => {
     const parts = doc.filePath.split('/');
     const file = parts.pop();
     const folder = parts.join('/');
@@ -53,7 +57,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-auto px-4">
+      <nav className="w-64 bg-white border-r dark:bg-gray-800 dark:border-gray-600 overflow-hidden px-4 h-screen sticky top-0">
         {Object.keys(docsByFolder).map((folder) => (
           <div
             key={folder}
@@ -78,7 +82,7 @@ export function DocPage({ docs, selectedDoc }: DocPageProps) {
         ))}
       </nav>
       <main className="flex-1 p-10 overflow-auto">
-        <div className="prose dark:prose-dark max-w-none overflow-scroll">
+        <div className="prose dark:prose-dark max-w-none">
           <ReactMarkdown
             components={markdownComponents}
             remarkPlugins={[gfm]}
