@@ -21,7 +21,9 @@ export default function TopNav() {
     <nav className="flex flex-row w-full items-center space-y-2.5 px-6 py-4 bg-white shadow-md">
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center space-x-4">
-          <Image src="/logo.png" width={52} height={21} alt="logo" />
+          <button onClick={() => handleLinkClick("/")}>
+            <Image src="/logo.png" width={52} height={21} alt="logo" />
+          </button>
           <h1 className="text-lg font-bold">FlowViz 🧙</h1>
           <div className="hidden md:flex items-center space-x-4 ml-4">
             <Link href="/">
@@ -61,6 +63,9 @@ export default function TopNav() {
           <div className="fixed inset-0 flex items-start justify-center z-50 pt-20">
             <div className="bg-white p-5 w-full h-full overflow-auto">
               <div className="space-y-4 mt-5 text-2xl flex flex-col">
+                <button onClick={() => handleLinkClick("/")}>
+                  <span className="font-medium text-grey-600 hover:text-blue-800 block">Home</span>
+                </button>
                 <button onClick={() => handleLinkClick("/docs")}>
                   <span className="font-medium text-grey-600 hover:text-blue-800 block">Docs</span>
                 </button>
