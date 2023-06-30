@@ -54,8 +54,8 @@ export default function Sankey() {
   };
 
   return (
-    <div className="flex">
-      <div className="w-1/2 p-6">
+    <div className="flex min-h-screen p-4">
+      <div className="w-1/2 p-6 overflow-auto">
         <SankeyForm input={input} options={options} handleChange={handleChange} handleSubmit={handleSubmit} handleOptionsChange={handleOptionsChange} />
         <SankeyTable data={data} handleEdit={handleEdit} handleRemove={handleRemove} />
       </div>
