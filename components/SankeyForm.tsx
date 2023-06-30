@@ -1,6 +1,6 @@
 // SankeyForm.tsx
 
-import { InputProps } from '../types';
+import { InputProps } from './types';
 
 export function SankeyForm({ input, options, handleChange, handleSubmit, handleOptionsChange }: InputProps) {
   return (
