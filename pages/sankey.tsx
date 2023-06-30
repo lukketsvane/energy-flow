@@ -5,6 +5,27 @@ import { Chart } from 'react-google-charts';
 export default function Sankey() {
   const [data, setData] = useState([['A', 'X', 5], ['A', 'Y', 7], ['A', 'Z', 6], ['B', 'X', 2], ['B', 'Y', 9], ['B', 'Z', 4]]);
   const [input, setInput] = useState({ from: '', to: '', weight: 0 });
+  const [options, setOptions] = useState({
+    height: 400,
+    sankey: {
+      node: {
+        colors: ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f', '#cab2d6', '#ffff99', '#1f78b4', '#33a02c'],
+        label: {
+          fontName: 'Times-Roman',
+          fontSize: 14,
+          color: '#871b47',
+          bold: true,
+          italic: true
+        },
+        nodePadding: 80,
+        width: 2
+      },
+      link: {
+        colorMode: 'gradient',
+        colors: ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f', '#cab2d6', '#ffff99', '#1f78b4', '#33a02c']
+      }
+    }
+  });
 
   const handleChange = (event) => {
     setInput({ ...input, [event.target.name]: event.target.value });
@@ -22,6 +43,19 @@ export default function Sankey() {
     setData(newData);
   };
 
+  const handleOptionsChange = (event) => {
+    setOptions({
+      ...options,
+      sankey: {
+        ...options.sankey,
+        node: {
+          ...options.sankey.node,
+          [event.target.name]: event.target.value
+        }
+      }
+    });
+  };
+
   return (
     <div className="flex">
       <div className="w-1/2 p-6 border-r-2 border-gray-300">
@@ -30,6 +64,15 @@ export default function Sankey() {
           <input className="border p-2 rounded mr-2" name="to" value={input.to} onChange={handleChange} placeholder="To" required />
           <input className="border p-2 rounded mr-2" name="weight" type="number" value={input.weight} onChange={handleChange} placeholder="Weight" required />
           <button className="bg-blue-500 text-white p-2 rounded" type="submit">Add</button>
+        </form>
+        <form className="mb-4" onSubmit={(e) => e.preventDefault()}>
+          <label className="mr-2">Colors:</label>
+          <input className="border p-2 rounded mr-2" name="colors" value={options.sankey.node.colors.join(',')} onChange={handleOptionsChange} required />
+          <br/>
+          <label className="mr-2">Font:</label>
+          <input className="border p-2 rounded mr-2" name="fontName" value={options.sankey.node.label.fontName} onChange={handleOptionsChange} placeholder="Font Name" required />
+          <label className="mr-2">Font Size:</label>
+          <input className="border p-2 rounded mr-2" name="fontSize" type="number" value={options.sankey.node.label.fontSize} onChange={handleOptionsChange} placeholder="Font Size" required />
         </form>
         <table className="w-full">
           <thead>
@@ -58,7 +101,7 @@ export default function Sankey() {
             ['From', 'To', 'Weight'],
             ...data
           ]}
-          options={{ width: 600 }}
+          options={options}
           rootProps={{ 'data-testid': '1' }}
         />
       </div>
