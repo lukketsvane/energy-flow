@@ -32,8 +32,11 @@ export default function TopNav() {
             <Link href="/docs">
               <span className="text-base font-medium text-grey-600 hover:text-blue-800">Docs</span>
             </Link>
-            <Link href="/help">
-              <span className="text-base font-medium text-grey-600 hover:text-blue-800">Help centre</span>
+            <Link href="/flowgraph">
+              <span className="text-base font-medium text-grey-600 hover:text-blue-800">Flowgraph</span>
+            </Link>
+            <Link href="/sankey">
+              <span className="text-base font-medium text-grey-600 hover:text-blue-800">Sankey</span>
             </Link>
             <Link href="/faq">
               <span className="text-base font-medium text-grey-600 hover:text-blue-800">FAQ</span>
@@ -68,6 +71,12 @@ export default function TopNav() {
                 </button>
                 <button onClick={() => handleLinkClick("/docs")}>
                   <span className="font-medium text-grey-600 hover:text-blue-800 block">Docs</span>
+                </button>
+                <button onClick={() => handleLinkClick("/flowgraph")}>
+                  <span className="font-medium text-grey-600 hover:text-blue-800 block">Flowgraph</span>
+                </button>
+                <button onClick={() => handleLinkClick("/sankey")}>
+                  <span className="font-medium text-grey-600 hover:text-blue-800 block">Sankey</span>
                 </button>
                 <button onClick={() => handleLinkClick("/help")}>
                   <span className="font-medium text-grey-600 hover:text-blue-800 block">Help centre</span>
